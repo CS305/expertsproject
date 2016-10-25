@@ -17,6 +17,8 @@ namespace IdentitySample.Controllers
     {
         public AccountController()
         {
+            //hello
+            //goodbye
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
