@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace IdentitySample.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class RolesAdminController : Controller
+    public class RolesAdminController : Controller //jnknkn
     {
         public RolesAdminController()
         {
