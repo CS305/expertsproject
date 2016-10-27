@@ -156,7 +156,7 @@ namespace IdentitySample.Controllers
                 user.City = model.City;
                 user.firstName = model.firstName;
                 user.lastName = model.lastName;
-                user.phoneNumber = model.phoneNumber;
+                user.number = model.number;
                 user.State = model.State;
                 user.PostalCode = model.PostalCode;
                 user.register = model.register; 

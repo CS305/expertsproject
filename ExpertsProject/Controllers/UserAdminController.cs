@@ -99,7 +99,7 @@ namespace IdentitySample.Controllers
                     City = userViewModel.City,
                     PostalCode = userViewModel.PostalCode,
                     register = userViewModel.register,
-                    phoneNumber = userViewModel.phoneNumber
+                    number = userViewModel.number
                 };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
@@ -107,7 +107,7 @@ namespace IdentitySample.Controllers
                 user.PostalCode = userViewModel.PostalCode;
                 user.firstName = userViewModel.firstName;
                 user.lastName = userViewModel.lastName;
-                user.phoneNumber = userViewModel.phoneNumber;
+                user.number = userViewModel.number;
                 user.register = userViewModel.register;
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
@@ -164,7 +164,7 @@ namespace IdentitySample.Controllers
                 PostalCode = user.PostalCode, 
                 firstName = user.firstName, 
                 lastName = user.lastName, 
-                phoneNumber = user.phoneNumber, 
+                number = user.number, 
                 register = user.register,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
@@ -179,7 +179,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Email,Id, Address, City, State,PostalCode,firstName,lastName,phoneNumber,register")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Email,Id, Address, City, State,PostalCode,firstName,lastName,number,register")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -197,7 +197,7 @@ namespace IdentitySample.Controllers
                 user.PostalCode = editUser.PostalCode;
                 user.firstName = editUser.firstName;
                 user.lastName = editUser.lastName;
-                user.phoneNumber = editUser.phoneNumber;
+                user.number = editUser.number;
                 user.register = editUser.register;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);

@@ -87,7 +87,7 @@ namespace IdentitySample.Models
         [Display(Name = "Last Name")] 
         public string lastName { get; set; }
         [Display(Name ="Phone Number")] 
-        public string phoneNumber { get; set; }
+        public string number { get; set; }
         public Register register { get; set; }
     }
     public class ResetPasswordViewModel
