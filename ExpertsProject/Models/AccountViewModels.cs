@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static IdentitySample.Models.ApplicationUser;
 
 namespace IdentitySample.Models
 {
@@ -76,8 +77,19 @@ namespace IdentitySample.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public string Address { get; set; } 
+        public string City { get; set; } 
+        public string State { get; set; } 
+        [Display(Name = "Postal Code")] 
+        public string PostalCode { get; set; } 
+        [Display(Name = "First Name")]
+        public string firstName { get; set; } 
+        [Display(Name = "Last Name")] 
+        public string lastName { get; set; }
+        [Display(Name ="Phone Number")] 
+        public string number { get; set; }
+        public Register register { get; set; }
     }
-
     public class ResetPasswordViewModel
     {
         [Required]
