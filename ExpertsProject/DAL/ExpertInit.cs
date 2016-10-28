@@ -13,8 +13,17 @@ namespace ExpertsProject.DAL
         {
             var experts = new List<Expert>
             {
-
+                new Expert { FName="Bob",LName="Ross"}
             };
+
+            experts.ForEach(s => context.Experts.Add(s));
+            context.SaveChanges();
+
+            var expertises = new List<Expertise>
+            {
+                new Expertise { Category="Art"}
+            };
+            expertises.ForEach(s => context.Expertises.Add(s));
             context.SaveChanges();
         }
     }
