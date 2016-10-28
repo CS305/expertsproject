@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ExpertsProject.Models
 {
-    public class ExpertiseModel
+    public class Expertise
     {
-        public string ExpertiseId { get; set; |}
+        public string ExpertiseId { get; set; }
         public string Category { get; set; }
     }
 }

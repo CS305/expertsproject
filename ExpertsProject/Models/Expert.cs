@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ExpertsProject.Models
 {
-    public class ExpertsModel
+    public class Expert
     {
         public string UserID { get; set; }
         public string FName { get; set; }
@@ -13,6 +13,11 @@ namespace ExpertsProject.Models
         public string ExpertiseId { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public bool IsVerified { get; set; }
+        public IsVerified IsVerified { get; set; }
+    }
+    public enum IsVerified
+    {
+        Yes = 0,
+        No
     }
 }
