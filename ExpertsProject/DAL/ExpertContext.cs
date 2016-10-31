@@ -12,7 +12,6 @@ namespace ExpertsProject.DAL
     {
         public ExpertContext() : base("ExpertContext")
         {
-
         }
 
         public DbSet<Expert> Experts { get; set; }

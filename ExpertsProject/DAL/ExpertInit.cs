@@ -13,7 +13,8 @@ namespace ExpertsProject.DAL
         {
             var experts = new List<Expert>
             {
-                new Expert { FName="Bob",LName="Ross"}
+                new Expert { FName="Bob",LName="Ross", Prefix=0,},
+                new Expert { FName="Stephen",LName="Hawkins", Prefix=0,}
             };
 
             experts.ForEach(s => context.Experts.Add(s));
@@ -21,7 +22,8 @@ namespace ExpertsProject.DAL
 
             var expertises = new List<Expertise>
             {
-                new Expertise { Category="Art"}
+                new Expertise { ExpertiseID=1,Category="Art",},
+                new Expertise { ExpertiseID=2,Category="Physics", }
             };
             expertises.ForEach(s => context.Expertises.Add(s));
             context.SaveChanges();
