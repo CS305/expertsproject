@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ExpertsProject.Models;
 using ExpertsProject.DAL;
+using PagedList;
 
 namespace ExpertsProject.Controllers
 {
@@ -12,11 +13,29 @@ namespace ExpertsProject.Controllers
     {
         private ExpertContext db = new ExpertContext();
         // GET: Expert
-        public ActionResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var experts = from s in db.Experts
                           select s; 
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                experts = experts.Where(s => s.LName.Contains(searchString) || s.FName.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
@@ -27,12 +46,10 @@ namespace ExpertsProject.Controllers
                     experts = experts.OrderBy(s => s.LName);
                     break;
             }
-            return View(experts.ToList());
-        }
 
-        public ViewResult Index()
-        {
-            return View(db.Experts.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(experts.ToPagedList(pageNumber, pageSize));
         }
     }
 }
