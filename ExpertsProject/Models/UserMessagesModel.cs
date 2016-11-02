@@ -7,7 +7,7 @@ namespace ExpertsProject.Models
 {
     public class UserMessagesModel
     {
-        
+           
         public String userID { get; set; }
         public DateTime postDate { get; set; }
         public dateTime dateOfLastMessage { get; set; }
@@ -17,7 +17,5 @@ namespace ExpertsProject.Models
         public String body { get; set; }
         public String ResponseID { get; set; }
         
-
-
     }
 }
