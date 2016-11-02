@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ExpertsProject.Models;
+using IdentitySample.Models;
 using ExpertsProject.DAL;
 using PagedList;
 
@@ -29,21 +30,21 @@ namespace ExpertsProject.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var experts = from s in db.Experts
+            var experts = from s in db.Users
                           select s; 
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                experts = experts.Where(s => s.LName.Contains(searchString) || s.FName.Contains(searchString));
+                experts = experts.Where(s => s.lastName.Contains(searchString) || s.firstName.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    experts = experts.OrderByDescending(s => s.LName);
+                    experts = experts.OrderByDescending(s => s.lastName);
                     break;
                 default:
-                    experts = experts.OrderBy(s => s.LName);
+                    experts = experts.OrderBy(s => s.lastName);
                     break;
             }
 
