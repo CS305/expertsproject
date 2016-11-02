@@ -88,7 +88,10 @@ namespace IdentitySample.Models
         public string lastName { get; set; }
         [Display(Name ="Phone Number")] 
         public string number { get; set; }
+        [Display(Name = "Register as: ")]
         public Register register { get; set; }
+        [Display(Name = "Prefix")] 
+        public Prefix prefix { get; set; }
     }
     public class ResetPasswordViewModel
     {

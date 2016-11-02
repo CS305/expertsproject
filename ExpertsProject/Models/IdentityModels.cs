@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using ExpertsProject.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
@@ -29,6 +30,7 @@ namespace IdentitySample.Models
         [Display(Name = "Phone Number")]
         public string number { get; set; }
         public Register register { get; set; }
+        public Prefix prefix { get;set; }
         public string DisplayAddress
         {
             get
@@ -46,10 +48,19 @@ namespace IdentitySample.Models
             User = 0,
             Expert
         }
+        public enum Prefix
+        {
+            Mr = 1, 
+            Dr, 
+            Ms,
+            Mrs
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Expert> Expert { get; set; }
+        public DbSet<MessageModel> MessageModel { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

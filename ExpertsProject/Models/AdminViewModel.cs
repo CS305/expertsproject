@@ -33,6 +33,7 @@ namespace IdentitySample.Models
         [Display(Name ="Phone Number")]
         public string number { get; set; }
         public Register register { get; set; }
+        public Prefix prefix { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
     }
