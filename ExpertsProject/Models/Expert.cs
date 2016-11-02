@@ -7,9 +7,9 @@ namespace ExpertsProject.Models
 {
     public class Expert
     {
-        public string ID { get; set; }
-        public string FName { get; set; }
-        public string LName { get; set; }
+        public string ExpertID { get; set; }
+        //public string FName { get; set; }
+        //public string LName { get; set; }
         public string ExpertiseId { get; set; }
         //public string Email { get; set; }
         //public int PhoneNumber { get; set; }

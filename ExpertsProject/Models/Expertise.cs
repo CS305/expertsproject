@@ -7,8 +7,8 @@ namespace ExpertsProject.Models
 {
     public class Expertise
     {
-        public int ExpertiseID { get; set; }
-        public int ExpertID { get; set; }
+        public string ExpertiseID { get; set; }
+        public string ExpertID { get; set; }
         public string Category { get; set; }
 
         public virtual Expert Expert { get; set; }
