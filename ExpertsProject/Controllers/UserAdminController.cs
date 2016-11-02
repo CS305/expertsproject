@@ -99,7 +99,8 @@ namespace IdentitySample.Controllers
                     City = userViewModel.City,
                     PostalCode = userViewModel.PostalCode,
                     register = userViewModel.register,
-                    number = userViewModel.number
+                    number = userViewModel.number, 
+                    prefix = userViewModel.prefix
                 };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
@@ -109,6 +110,7 @@ namespace IdentitySample.Controllers
                 user.lastName = userViewModel.lastName;
                 user.number = userViewModel.number;
                 user.register = userViewModel.register;
+                user.prefix = userViewModel.prefix;
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -166,6 +168,7 @@ namespace IdentitySample.Controllers
                 lastName = user.lastName, 
                 number = user.number, 
                 register = user.register,
+                prefix = user.prefix,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -179,7 +182,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Email,Id, Address, City, State,PostalCode,firstName,lastName,number,register")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Email,Id,prefix, Address, City, State,PostalCode,firstName,lastName,number,register")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -199,6 +202,7 @@ namespace IdentitySample.Controllers
                 user.lastName = editUser.lastName;
                 user.number = editUser.number;
                 user.register = editUser.register;
+                user.prefix = editUser.prefix;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 
