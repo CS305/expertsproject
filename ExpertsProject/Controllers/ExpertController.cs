@@ -46,6 +46,7 @@ namespace ExpertsProject.Controllers
                 default:
                     experts = experts.OrderBy(s => s.lastName);
                     break;
+                    //
             }
 
             int pageSize = 3;
