@@ -10,7 +10,7 @@ namespace ExpertsProject.Models
            
         public String userID { get; set; }
         public DateTime postDate { get; set; }
-        public dateTime dateOfLastMessage { get; set; }
+        public DateTime dateOfLastMessage { get; set; }
         public DateTime currentDate { get; set; }
         public String subject { get; set; }
         public String messageID { get; set; }
