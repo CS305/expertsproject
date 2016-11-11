@@ -2,15 +2,14 @@
     @using Microsoft.AspNet.Identity
 @{
     IdentitySample.Controllers.HomeController p = new IdentitySample.Controllers.HomeController();
-    String hh = p.getFirstName();
-}
-@{
+    String hh = p.getFirstName(User.Identity.GetUserName());
+
     ViewBag.Title = "Home Page";
 }
 
 <div>
 <dl class="dl-horizontal">
     <dt>First Name:</dt>
-     <dd> @Html.Raw(p.getFirstName()) </dd>  
+     <dd> @Html.Raw(hh) </dd>  
 </dl>
 </div>

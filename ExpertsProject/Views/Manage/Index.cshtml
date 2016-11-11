@@ -1,5 +1,15 @@
 ﻿@model IdentitySample.Models.IndexViewModel
+@using Microsoft.AspNet.Identity
 @{
+    IdentitySample.Controllers.ManageController p = new IdentitySample.Controllers.ManageController();
+    String hh = p.getFirstName(User.Identity.GetUserName());
+    String hf = p.getAddress(User.Identity.GetUserName());
+    String ha = p.getCity(User.Identity.GetUserName());
+    String hb = p.getLastName(User.Identity.GetUserName());
+    String hc = p.getNumber(User.Identity.GetUserName());
+    String hd = p.getPostal(User.Identity.GetUserName());
+    String hg = p.getState(User.Identity.GetUserName());
+
     ViewBag.Title = "Manage your account";
 }
 
@@ -18,58 +28,26 @@
             }
         </p>
         <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null)
-            {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
-            }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]
+            First Name: @Html.Raw(hh) 
         </p>
         <p>
-            External Logins: @Model.Logins.Count
-            @Html.ActionLink("[Manage]", "ManageLogins")
+            Last Name: @Html.Raw(hb) 
+        </p> 
+        <p>
+            Address: @Html.Raw(hf) 
         </p>
-        @if (Model.TwoFactor)
-        {
-            <form method="post" action="/Manage/DisableTFA">
-                <p>
-                    Two factor is currently enabled:
-                    <input type="submit" value="Disable" class="btn btn-default"/>
-                </p>
-            </form>
-        }
-        else
-        {
-            <form method="post" action="/Manage/EnableTFA">
-                <p>
-                    Two factor is currently disabled:
-                    <input type="submit" value="Enable" class="btn btn-default"/>
-                </p>
-            </form>
-        }
-        @if (Model.BrowserRemembered)
-        {
-            <form method="post" action="/Manage/ForgetBrowser">
-                <p>
-                    Browser is curently remembered for two factor:
-                    <input type="submit" value="Forget Browser" class="btn btn-default" />
-                </p>
-            </form>
-        }
-        else
-        {
-            <form method="post" action="/Manage/RememberBrowser">
-                <p>
-                    Browser is curently not remembered for two factor:
-                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
-                </p>
-            </form>
-        }
+        <p>
+            City: @Html.Raw(ha) 
+        </p>
+        <p>
+            State: @Html.Raw(hg) 
+        </p>
+        <p>
+            Postal Code: @Html.Raw(hd) 
+        </p>
+
+        <p>
+            Phone Number: @Html.Raw(hc)
+        </p>
     </div>
 </div>

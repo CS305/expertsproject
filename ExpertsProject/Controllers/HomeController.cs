@@ -1,17 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using IdentitySample.Models;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Data;
-using System.Data.Entity;
-using System.Net;
 
 namespace IdentitySample.Controllers
 {
@@ -73,15 +65,15 @@ namespace IdentitySample.Controllers
                 _userManager = value;
             }
         }
-
-        public string getFirstName()
+        public string getFirstName(string userId)
         {
             string firstName = "";
             var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             using (SqlConnection myConnection = new SqlConnection(con))
             {
-                string oString = "Select firstName from AspNetUsers";
+                string oString = "Select * from AspNetUsers Where UserName=@fname";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Fname", userId);
                 myConnection.Open();
                 using (SqlDataReader oReader = oCmd.ExecuteReader())
                 {
