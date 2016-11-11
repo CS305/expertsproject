@@ -1,8 +1,16 @@
-﻿
+﻿@model IdentitySample.Models.IndexViewModel 
+    @using Microsoft.AspNet.Identity
+@{
+    IdentitySample.Controllers.HomeController p = new IdentitySample.Controllers.HomeController();
+    String hh = p.getFirstName();
+}
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="jumbotron">
-    <h1>ORCA</h1>
-    <p class="lead"></p>
+
+<div>
+<dl class="dl-horizontal">
+    <dt>First Name:</dt>
+     <dd> @Html.Raw(p.getFirstName()) </dd>  
+</dl>
 </div>
