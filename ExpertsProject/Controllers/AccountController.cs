@@ -157,7 +157,8 @@ namespace IdentitySample.Controllers
                 user.number = model.number;
                 user.State = model.State;
                 user.PostalCode = model.PostalCode;
-                user.register = model.register; 
+                user.register = model.register;
+                user.prefix = model.prefix; 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
