@@ -31,7 +31,7 @@ namespace ExpertsProject.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var experts = from s in db.Users
-                          select s; 
+                          select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
