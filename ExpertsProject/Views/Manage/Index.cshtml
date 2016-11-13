@@ -1,53 +1,49 @@
 ﻿@model IdentitySample.Models.IndexViewModel
 @using Microsoft.AspNet.Identity
-@{
-    IdentitySample.Controllers.ManageController p = new IdentitySample.Controllers.ManageController();
-    String hh = p.getFirstName(User.Identity.GetUserName());
-    String hf = p.getAddress(User.Identity.GetUserName());
-    String ha = p.getCity(User.Identity.GetUserName());
-    String hb = p.getLastName(User.Identity.GetUserName());
-    String hc = p.getNumber(User.Identity.GetUserName());
-    String hd = p.getPostal(User.Identity.GetUserName());
-    String hg = p.getState(User.Identity.GetUserName());
+@using IdentitySample.Models
+    @{
+        //IdentitySample.Controllers.ManageController p = new IdentitySample.Controllers.ManageController();
+        var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+        var currentUser = manager.FindById(User.Identity.GetUserId());
 
-    ViewBag.Title = "Manage your account";
-}
+        ViewBag.Title = "Manage your account";
+    }
 
-<h2>@ViewBag.Title.</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-8">
-        <p>
-            @if (Model.HasPassword)
+    <h2>@ViewBag.Title.</h2>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Pick a password", "SetPassword")
-            }
-        </p>
-        <p>
-            First Name: @Html.Raw(hh) 
-        </p>
-        <p>
-            Last Name: @Html.Raw(hb) 
-        </p> 
-        <p>
-            Address: @Html.Raw(hf) 
-        </p>
-        <p>
-            City: @Html.Raw(ha) 
-        </p>
-        <p>
-            State: @Html.Raw(hg) 
-        </p>
-        <p>
-            Postal Code: @Html.Raw(hd) 
-        </p>
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Pick a password", "SetPassword")
+                }
+            </p>
+            <p>
+                First Name: @Html.Raw(currentUser.firstName)
+            </p>
+            <p>
+                Last Name: @Html.Raw(currentUser.lastName)
+            </p>
+            <p>
+                Address: @Html.Raw(currentUser.Address)
+            </p>
+            <p>
+                City: @Html.Raw(currentUser.City)
+            </p>
+            <p>
+                State: @Html.Raw(currentUser.State)
+            </p>
+            <p>
+                Postal Code: @Html.Raw(currentUser.PostalCode)
+            </p>
 
-        <p>
-            Phone Number: @Html.Raw(hc)
-        </p>
+            <p>
+                Phone Number: @Html.Raw(currentUser.number)
+            </p>
+        </div>
     </div>
-</div>
