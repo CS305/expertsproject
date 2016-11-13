@@ -10,10 +10,10 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()
@@ -222,7 +222,14 @@ namespace IdentitySample.Controllers
                     ModelState.AddModelError("", result.Errors.First());
                     return View();
                 }
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index");
+                } 
+                else
+                {
+                    return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Home", action = "Index" }));
+                }
             }
             ModelState.AddModelError("", "Something failed.");
             return View();
