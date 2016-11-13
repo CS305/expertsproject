@@ -85,8 +85,29 @@ namespace IdentitySample.Models
     public class EmailService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your email service here to send an email.
+        { 
+            //Credentials:
+            var sendGridUserName = "arob95";
+            var sentFrom = "roberts281@live.marshall.edu";
+            var sendGridPassword = "baby1995";
+
+            //Configure client: 
+            var client = new System.Net.Mail.SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
+            client.Port = 587;
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+
+            //Create the credentials:
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(sendGridUserName, sendGridPassword);
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            //Create the message:
+            var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body; 
+
+            //Send:
             return Task.FromResult(0);
         }
     }

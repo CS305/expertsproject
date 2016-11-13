@@ -1,11 +1,14 @@
 ﻿using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace IdentitySample.Controllers
 {
@@ -46,9 +49,10 @@ namespace IdentitySample.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
+            var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
+
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId()),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId()),
@@ -57,7 +61,6 @@ namespace IdentitySample.Controllers
             };
             return View(model);
         }
-
         //
         // GET: /Account/RemoveLogin
         public ActionResult RemoveLogin()
@@ -388,6 +391,153 @@ namespace IdentitySample.Controllers
             Error
         }
 
+        public string getFirstName(string userId)
+        {
+            string firstName = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@fname";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Fname", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        firstName = oReader["firstName"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return firstName;
+        }
+        public string getLastName(string userId)
+        {
+            string lastName = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@lname";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Lname", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        lastName = oReader["lastName"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return lastName;
+        }
+        public string getNumber(string userId)
+        {
+            string number = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@num";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Num", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        number = oReader["number"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return number;
+        }
+        public string getAddress(string userId)
+        {
+            string address = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@address";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Address", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        address = oReader["Address"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return address;
+        }
+        public string getCity(string userId)
+        {
+            string city = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@city";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@City", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        city = oReader["City"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return city;
+        }
+        public string getState(string userId)
+        {
+            string state = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@state";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@State", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        state = oReader["State"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return state;
+        }
+        public string getPostal(string userId)
+        {
+            string postal = "";
+            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = "Select * from AspNetUsers Where UserName=@postal";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                oCmd.Parameters.AddWithValue("@Postal", userId);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        postal = oReader["PostalCode"].ToString();
+                    }
+                    myConnection.Close();
+                }
+            }
+            return postal;
+        }
         #endregion
     }
 }
