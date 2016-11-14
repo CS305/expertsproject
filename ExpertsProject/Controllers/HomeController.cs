@@ -4,15 +4,17 @@ using Microsoft.AspNet.Identity.Owin;
 using IdentitySample.Models;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return View(await UserManager.Users.ToListAsync());
         }
 
         [Authorize]
@@ -34,6 +36,18 @@ namespace IdentitySample.Controllers
 
         public HomeController()
         {
+        }
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

@@ -1,15 +1,138 @@
-﻿@model IdentitySample.Models.IndexViewModel 
-    @using Microsoft.AspNet.Identity
+﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
+@using Microsoft.AspNet.Identity
+@using IdentitySample.Models
 @{
-    IdentitySample.Controllers.HomeController p = new IdentitySample.Controllers.HomeController();
-    String hh = p.getFirstName(User.Identity.GetUserName());
-
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
     ViewBag.Title = "Home Page";
 }
-
-<div>
-<dl class="dl-horizontal">
-    <dt>First Name:</dt>
-     <dd> @Html.Raw(hh) </dd>  
-</dl>
-</div>
+@if (Model != null)
+{
+    foreach (var experts in Model)
+    {
+    <div class="cn-list-row-alternate vcard individual" id="@experts.Id"
+         data-entry-type="Individual" dataentry-id="44"
+         data-entry-slug="name">
+        <div class="cn-entry" style="background-color: #FFF; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
+            <div class="cn-left" style="width:49%; float:left">
+                <div style="clear:both;"></div>
+                <div style="margin-bottom: 10px;">
+                    <div style="font-size:larger;font-variant: small-caps">
+                        <strong>
+                            <a title="@experts.prefix + @experts.firstName + @experts.lastName" href="http://www.marshall.edu/experts/directory/name/dr-alfred-akinsete/">
+                                <span class="fn n notranslate">
+                                    <span class="given-name">@experts.prefix  @experts.firstName</span>
+                                    <span class="family-name">@experts.lastName</span>
+                                </span>
+                            </a>
+                        </strong>
+                    </div>
+                    <span class="org">
+                        <span class="organization-name notranslate">Marshall University</span>
+                    </span>
+                </div>
+            </div>
+            <div class="cn-right" style="text-align: right;">
+                <span class="phone-number-block">
+                    <span class="tel cn-phone-number">
+                        <span class="phone-name">Work Phone</span>
+                        <span class="cn-separator">:</span>
+                        <span class="value">@experts.number</span>
+                        <span class="type" style="display: none;"> work</span>
+                    </span>
+                </span>
+                <span class="email-address-block">
+                    <span class="email cn-email-address">
+                        <span class="email-name">Work Email</span>
+                        <span class="cn-separator">:</span>
+                        <span class="email-address">
+                            <a class="value" title="Dr.Alfred Akinsete work email." href="mailto: + @experts.Email ">@experts.Email</a>
+                        </span>
+                        <span class="type" style="display: none;">INTERNET</span>
+                    </span>
+                </span>
+            </div>
+            <div style="clear:both"></div>
+            <div class="cn-meta" style="margin-top: 6px"></div>
+            <div class="cn-clear" style="display:table; width:100%;">
+                <div style="display:table-cell; vertical-align:middle;">
+                    <div class="cn-categories">
+                        <span class="cn_category_label">Categories;</span>
+                        <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
+                    </div>
+                </div>
+                <div style="display:table-cell; text-align:right;vertical-align:middle;">
+                    <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
+                    <span class="cn-return-to-top">
+                        <a href="#cn-top" title="Return to top.">
+                            <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+}
+@*<div class="cn-list-row-alternate vcard individual mathematics" id="@currentUser.Id"
+         data-entry-type="Individual" dataentry-id="44"
+         data-entry-slug="dr-alfred-akinsete">
+        <div class="cn-entry" style="background-color: #FFF; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
+            <div class="cn-left" style="width:49%; float:left">
+                <div style="clear:both;"></div>
+                <div style="margin-bottom: 10px;">
+                    <div style="font-size:larger;font-variant: small-caps">
+                        <strong>
+                            <a title="@currentUser.prefix  @currentUser.firstName  @currentUser.lastName" href="http://www.marshall.edu/experts/directory/name/dr-alfred-akinsete/">
+                                <span class="fn n notranslate">
+                                    <span class="given-name">@currentUser.prefix  @currentUser.firstName</span>
+                                    <span class="family-name">@currentUser.lastName</span>
+                                </span>
+                            </a>
+                        </strong>
+                    </div>
+                    <span class="org">
+                        <span class="organization-name notranslate">Marshall University</span>
+                    </span>
+                </div>
+            </div>
+            <div class="cn-right" style=" text-align: right;">
+                <span class="phone-number-block">
+                    <span class="tel cn-phone-number">
+                        <span class="phone-name">Work Phone</span>
+                        <span class="cn-separator">:</span>
+                        <span class="value">@currentUser.number</span>
+                        <span class="type" style="display: none;"> work</span>
+                    </span>
+                </span>
+                <span class="email-address-block">
+                    <span class="email cn-email-address">
+                        <span class="email-name">Work Email</span>
+                        <span class="cn-separator">:</span>
+                        <span class="email-address">
+                            <a class="value" title="Dr.Alfred Akinsete work email." href="mailto:akinsete@marshall.edu">@currentUser.Email</a>
+                        </span>
+                        <span class="type" style="display: none;">INTERNET</span>
+                    </span>
+                </span>
+            </div>
+            <div style="clear:both"></div>
+            <div class="cn-meta" style="margin-top: 6px"></div>
+            <div class="cn-clear" style=" display:table; width:100%;">
+                <div style="display:table-cell; vertical-align:middle;">
+                    <div class="cn-categories">
+                        <span class="cn_category_label">Categories:</span>
+                        <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
+                    </div>
+                </div>
+                <div style="display:table-cell; text-align:right; vertical-align:middle;">
+                    <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px ; display:none">Updated 5 years ago.</span>
+                    <span class="cn-return-to-top">
+                        <a href="#cn-top" title=" Return to top.">
+                            <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>*@
