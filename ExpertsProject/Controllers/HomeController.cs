@@ -51,7 +51,7 @@ namespace IdentitySample.Controllers
                     experts = experts.OrderBy(s => s.lastName);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             //return View(await UserManager.Users.ToListAsync());
             //return View(experts.ToList());
