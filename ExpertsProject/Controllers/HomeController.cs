@@ -2,19 +2,46 @@
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using IdentitySample.Models;
+using ExpertsProject.Models;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System;
+using System.Linq;
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        private ApplicationDbContext db;
+
+        public HomeController()
         {
-            return View(await UserManager.Users.ToListAsync());
+            db = new ApplicationDbContext();
+        }
+        public async Task<ActionResult> Index(string sortOrder, string searchString)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var experts = from s in db.Users
+                          select s;
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                experts = experts.Where(s => s.lastName.Contains(searchString) || s.firstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    experts = experts.OrderByDescending(s => s.lastName);
+                    break;
+                default:
+                    experts = experts.OrderBy(s => s.lastName);
+                    break;
+            }
+            //return View(await UserManager.Users.ToListAsync());
+            return View(experts.ToList());
         }
 
         [Authorize]
@@ -34,9 +61,7 @@ namespace IdentitySample.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public HomeController()
-        {
-        }
+
         private ApplicationRoleManager _roleManager;
         public ApplicationRoleManager RoleManager
         {
