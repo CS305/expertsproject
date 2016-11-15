@@ -29,7 +29,7 @@ namespace IdentitySample.Controllers
                           select s;
             if(!String.IsNullOrEmpty(searchString))
             {
-                experts = experts.Where(s => s.lastName.Contains(searchString));
+                experts = experts.Where(s => s.lastName.Contains(searchString) || s.firstName.Contains(searchString));
             }
             switch (sortOrder)
             {
@@ -40,7 +40,8 @@ namespace IdentitySample.Controllers
                     experts = experts.OrderBy(s => s.lastName);
                     break;
             }
-            return View(await UserManager.Users.ToListAsync());
+            //return View(await UserManager.Users.ToListAsync());
+            return View(experts.ToList());
         }
 
         [Authorize]
