@@ -6,6 +6,20 @@
     var currentUser = manager.FindById(User.Identity.GetUserId());
     ViewBag.Title = "Home Page";
 }
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<tr>
+    <th>
+        @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+    </th>
+    <th></th>
+</tr>
 @if (Model != null)
 {
     foreach (var experts in Model)
