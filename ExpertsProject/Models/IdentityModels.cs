@@ -66,8 +66,8 @@ namespace IdentitySample.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        override
-        public DbSet<ApplicationUser> Users { get; set; }
+        //override
+        //public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Expert> Expert { get; set; }
         public DbSet<MessageModel> MessageModel { get; set; }
         public ApplicationDbContext()

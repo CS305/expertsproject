@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System;
+using System.Linq;
 
 namespace IdentitySample.Controllers
 {
@@ -20,8 +21,25 @@ namespace IdentitySample.Controllers
         {
             db = new ApplicationDbContext();
         }
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder, string searchString)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var experts = from s in db.Users
+                          select s;
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                experts = experts.Where(s => s.lastName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    experts = experts.OrderByDescending(s => s.lastName);
+                    break;
+                default:
+                    experts = experts.OrderBy(s => s.lastName);
+                    break;
+            }
             return View(await UserManager.Users.ToListAsync());
         }
 
@@ -105,24 +123,6 @@ namespace IdentitySample.Controllers
                 }
             }
             return firstName;
-        }
-
-        public ActionResult Index(string sortOrder)
-        {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var experts = from s in db.Users
-                           select s;
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    experts = experts.OrderByDescending(s => s.lastName);
-                    break;
-                default:
-                    experts = experts.OrderBy(s => s.lastName);
-                    break;
-            }
-            return View(experts.ToList());
         }
     }
 }
