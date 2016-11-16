@@ -1,152 +1,136 @@
 ﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
 @using Microsoft.AspNet.Identity
 @using IdentitySample.Models
-@{
-    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
-    var currentUser = manager.FindById(User.Identity.GetUserId());
-    ViewBag.Title = "Home Page";
-}
-@using (Html.BeginForm())
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
-}
 
-<tr>
-    <th>
-        @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
-    </th>
-    <th></th>
-</tr>
-@if (Model != null)
-{
-    foreach (var experts in Model)
-    {
-    <div class="cn-list-row-alternate vcard individual" id="@experts.Id"
-         data-entry-type="Individual" dataentry-id="44"
-         data-entry-slug="name">
-        <div class="cn-entry" style="background-color: #FFF; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
-            <div class="cn-left" style="width:49%; float:left">
-                <div style="clear:both;"></div>
-                <div style="margin-bottom: 10px;">
-                    <div style="font-size:larger;font-variant: small-caps">
-                        <strong>
-                            <a title="@experts.prefix + @experts.firstName + @experts.lastName" href="http://www.marshall.edu/experts/directory/name/dr-alfred-akinsete/">
-                                <span class="fn n notranslate">
-                                    <span class="given-name">@experts.prefix  @experts.firstName</span>
-                                    <span class="family-name">@experts.lastName</span>
-                                </span>
-                            </a>
-                        </strong>
-                    </div>
-                    <span class="org">
-                        <span class="organization-name notranslate">Marshall University</span>
-                    </span>
-                </div>
-            </div>
-            <div class="cn-right" style="text-align: right;">
-                <span class="phone-number-block">
-                    <span class="tel cn-phone-number">
-                        <span class="phone-name">Work Phone</span>
-                        <span class="cn-separator">:</span>
-                        <span class="value">@experts.number</span>
-                        <span class="type" style="display: none;"> work</span>
-                    </span>
-                </span>
-                <span class="email-address-block">
-                    <span class="email cn-email-address">
-                        <span class="email-name">Work Email</span>
-                        <span class="cn-separator">:</span>
-                        <span class="email-address">
-                            <a class="value" title="Dr.Alfred Akinsete work email." href="mailto: + @experts.Email ">@experts.Email</a>
-                        </span>
-                        <span class="type" style="display: none;">INTERNET</span>
-                    </span>
-                </span>
-            </div>
-            <div style="clear:both"></div>
-            <div class="cn-meta" style="margin-top: 6px"></div>
-            <div class="cn-clear" style="display:table; width:100%;">
-                <div style="display:table-cell; vertical-align:middle;">
-                    <div class="cn-categories">
-                        <span class="cn_category_label">Categories;</span>
-                        <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
-                    </div>
-                </div>
-                <div style="display:table-cell; text-align:right;vertical-align:middle;">
-                    <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
-                    <span class="cn-return-to-top">
-                        <a href="#cn-top" title="Return to top.">
-                            <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
+    @{
+        var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+        var currentUser = manager.FindById(User.Identity.GetUserId());
+        ViewBag.Title = "Home Page";
     }
-}
-@*<div class="cn-list-row-alternate vcard individual mathematics" id="@currentUser.Id"
-         data-entry-type="Individual" dataentry-id="44"
-         data-entry-slug="dr-alfred-akinsete">
-        <div class="cn-entry" style="background-color: #FFF; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
-            <div class="cn-left" style="width:49%; float:left">
-                <div style="clear:both;"></div>
-                <div style="margin-bottom: 10px;">
-                    <div style="font-size:larger;font-variant: small-caps">
-                        <strong>
-                            <a title="@currentUser.prefix  @currentUser.firstName  @currentUser.lastName" href="http://www.marshall.edu/experts/directory/name/dr-alfred-akinsete/">
-                                <span class="fn n notranslate">
-                                    <span class="given-name">@currentUser.prefix  @currentUser.firstName</span>
-                                    <span class="family-name">@currentUser.lastName</span>
-                                </span>
-                            </a>
-                        </strong>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+    <tr>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th></th>
+    </tr>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p{ 
+            padding-top:5px; 
+        }
+        #mydiv .entry-content{
+            display: inline-block;
+            width: 100%; 
+            margin:0 auto; 
+            float:left;
+            padding:5px;
+            padding-left:15px; 
+            padding-right:15px;
+        }
+    </style>
+</head>
+
+    @if (Model != null)
+    {
+        foreach (var experts in Model)
+        {
+            <body>
+                <div id="mydiv">
+                <div class="entry-content" style="width:550px;">
+                    <div class="row" style="width:550px;">
+                        <div class="small-12 large-10 columns border-r" role="main" style="width:550px;">
+                            <article class="post-/ page type-page status-publish hentry" style="width:550px;">
+                                <div class="entry-content" style="width:550px;">
+                                    <div style="position: absolute; top:0; right:0;"></div>
+                                    <div class="cn-list" data-connections-version="8.5.26-0.1.9" style="width:550px;">
+                                        <div class="cn-template cn-card" data-template-version="3.0" style="width:550px;">
+
+                                            <div class="connections-list cn-list-body cn-clear" >
+                                                <div class="cn-list-secion-head" ></div>
+                                                <div class="cn-list-row-alternate vcard individual"
+                                                     data-entry-type="Individual"
+                                                     data-entry-slug="name" style="width:550px;">
+                                                    <div class="cn-entry" style="background-color: #FFF; width: 550px; height: 100px; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
+                                                        <div class="cn-left" style="width:45%; float:left">
+                                                            <div style="clear:both;"></div>
+                                                            <div style="margin-bottom: 10px;">
+                                                                <div style="font-size:larger;font-variant: small-caps">
+                                                                    <strong>
+                                                                        <a title="@experts.prefix + @experts.firstName + @experts.lastName">
+                                                                            <span class="fn n notranslate">
+                                                                                <span class="given-name">@experts.prefix  @experts.firstName</span>
+                                                                                <span class="family-name">@experts.lastName</span>
+                                                                            </span>
+                                                                        </a>
+                                                                    </strong>
+                                                                </div>
+                                                                <span class="org">
+                                                                    <span class="organization-name notranslate">Marshall University</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cn-right" style="text-align: left;">
+                                                            <div class="phone-number-block">
+                                                                <span class="tel cn-phone-number">
+                                                                    <span class="phone-name">Work Phone</span>
+                                                                    <span class="cn-separator">:</span>
+                                                                    <span class="value">@experts.number</span>
+                                                                    <span class="type" style="display: none;"> work</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="email-address-block">
+                                                                <div class="email cn-email-address">
+                                                                    <span class="email-name">Work Email</span>
+                                                                    <span class="cn-separator">:</span>
+                                                                    <span class="email-address">
+                                                                        <a class="value" title="work email." href="mailto: @experts.Email ">@experts.Email</a>
+                                                                    </span>
+                                                                    <span class="type" style="display: none;">INTERNET</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="clear:both"></div>
+                                                        <div class="cn-meta" style="margin-top: 4px"></div>
+                                                        <div class="cn-clear" style="display:table; width:100%;">
+                                                            <div style="display:table-cell; vertical-align:middle;">
+                                                                <div class="cn-categories">
+                                                                    <span class="cn_category_label">Expert In:</span>
+                                                                    <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
+                                                                </div>
+                                                            </div>
+                                                            <div style="display:table-cell; text-align:right;vertical-align:middle;">
+                                                                <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
+                                                                <span class="cn-return-to-top">
+                                                                    <a href="#cn-top" title="Return to top.">
+                                                                        <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
                     </div>
-                    <span class="org">
-                        <span class="organization-name notranslate">Marshall University</span>
-                    </span>
                 </div>
-            </div>
-            <div class="cn-right" style=" text-align: right;">
-                <span class="phone-number-block">
-                    <span class="tel cn-phone-number">
-                        <span class="phone-name">Work Phone</span>
-                        <span class="cn-separator">:</span>
-                        <span class="value">@currentUser.number</span>
-                        <span class="type" style="display: none;"> work</span>
-                    </span>
-                </span>
-                <span class="email-address-block">
-                    <span class="email cn-email-address">
-                        <span class="email-name">Work Email</span>
-                        <span class="cn-separator">:</span>
-                        <span class="email-address">
-                            <a class="value" title="Dr.Alfred Akinsete work email." href="mailto:akinsete@marshall.edu">@currentUser.Email</a>
-                        </span>
-                        <span class="type" style="display: none;">INTERNET</span>
-                    </span>
-                </span>
-            </div>
-            <div style="clear:both"></div>
-            <div class="cn-meta" style="margin-top: 6px"></div>
-            <div class="cn-clear" style=" display:table; width:100%;">
-                <div style="display:table-cell; vertical-align:middle;">
-                    <div class="cn-categories">
-                        <span class="cn_category_label">Categories:</span>
-                        <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
                     </div>
-                </div>
-                <div style="display:table-cell; text-align:right; vertical-align:middle;">
-                    <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px ; display:none">Updated 5 years ago.</span>
-                    <span class="cn-return-to-top">
-                        <a href="#cn-top" title=" Return to top.">
-                            <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>*@
+            </body>
+        }
+
+    }
+
+</html>

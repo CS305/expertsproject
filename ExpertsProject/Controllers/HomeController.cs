@@ -104,26 +104,5 @@ namespace IdentitySample.Controllers
                 _userManager = value;
             }
         }
-        public string getFirstName(string userId)
-        {
-            string firstName = "";
-            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-            using (SqlConnection myConnection = new SqlConnection(con))
-            {
-                string oString = "Select * from AspNetUsers Where UserName=@fname";
-                SqlCommand oCmd = new SqlCommand(oString, myConnection);
-                oCmd.Parameters.AddWithValue("@Fname", userId);
-                myConnection.Open();
-                using (SqlDataReader oReader = oCmd.ExecuteReader())
-                {
-                    while (oReader.Read())
-                    {
-                        firstName = oReader["firstName"].ToString();
-                    }
-                    myConnection.Close();
-                }
-            }
-            return firstName;
-        }
     }
 }
