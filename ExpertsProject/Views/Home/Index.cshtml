@@ -17,7 +17,7 @@
 
     <tr>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, @class="a" })
         </th>
         <th></th>
     </tr>
@@ -25,15 +25,19 @@
 <html>
 <head>
     <style>
+        a{ 
+            color:#079449;
+        }
         p{ 
             padding-top:5px; 
+            color:#079449; 
         }
         #mydiv .entry-content{
             display: inline-block;
             width: 100%; 
             margin:0 auto; 
             float:left;
-            padding:5px;
+            padding:3px;
             padding-left:15px; 
             padding-right:15px;
         }
@@ -66,7 +70,7 @@
                                                             <div style="margin-bottom: 10px;">
                                                                 <div style="font-size:larger;font-variant: small-caps">
                                                                     <strong>
-                                                                        <a title="@experts.prefix + @experts.firstName + @experts.lastName">
+                                                                        <a style="color:#079449" title="@experts.prefix + @experts.firstName + @experts.lastName">
                                                                             <span class="fn n notranslate">
                                                                                 <span class="given-name">@experts.prefix  @experts.firstName</span>
                                                                                 <span class="family-name">@experts.lastName</span>
@@ -93,7 +97,7 @@
                                                                     <span class="email-name">Work Email</span>
                                                                     <span class="cn-separator">:</span>
                                                                     <span class="email-address">
-                                                                        <a class="value" title="work email." href="mailto: @experts.Email ">@experts.Email</a>
+                                                                        <a class="value" title="@experts.prefix @experts.firstName @experts.lastName work email." style="color:#079449"href="mailto: @experts.Email ">@experts.Email</a>
                                                                     </span>
                                                                     <span class="type" style="display: none;">INTERNET</span>
                                                                 </div>
@@ -111,7 +115,7 @@
                                                             <div style="display:table-cell; text-align:right;vertical-align:middle;">
                                                                 <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
                                                                 <span class="cn-return-to-top">
-                                                                    <a href="#cn-top" title="Return to top.">
+                                                                    <a href="#" title="Return to top.">
                                                                         <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
                                                                     </a>
                                                                 </span>
