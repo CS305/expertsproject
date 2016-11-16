@@ -96,8 +96,9 @@ namespace IdentitySample.Controllers
                     PostalCode = userViewModel.PostalCode,
                     register = userViewModel.register,
                     number = userViewModel.number, 
-                    prefix = userViewModel.prefix
-                };
+                    prefix = userViewModel.prefix,
+                   isDeleted = userViewModel.isDeleted
+    };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
                 user.State = userViewModel.State;
@@ -107,6 +108,7 @@ namespace IdentitySample.Controllers
                 user.number = userViewModel.number;
                 user.register = userViewModel.register;
                 user.prefix = userViewModel.prefix;
+                user.isDeleted = userViewModel.isDeleted;
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -165,6 +167,7 @@ namespace IdentitySample.Controllers
                 number = user.number, 
                 register = user.register,
                 prefix = user.prefix,
+                isDeleted=user.isDeleted,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -199,6 +202,7 @@ namespace IdentitySample.Controllers
                 user.number = editUser.number;
                 user.register = editUser.register;
                 user.prefix = editUser.prefix;
+                user.isDeleted = editUser.isDeleted;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 

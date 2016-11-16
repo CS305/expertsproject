@@ -38,6 +38,8 @@ namespace IdentitySample.Models
         public string number { get; set; }
         public Register register { get; set; }
         public Prefix prefix { get;set; }
+        [Display (Name ="Remove from list")]
+        public Deleted isDeleted { get; set; }
         public string DisplayAddress
         {
             get
@@ -49,6 +51,11 @@ namespace IdentitySample.Models
                 return string
                     .Format("{0} {1} {2} {3}", dspAddress, dspCity, dspState, dspPostalCode);
             }
+        }
+        public enum Deleted
+        {
+            No=0, 
+            Yes
         }
         public enum Register
         {

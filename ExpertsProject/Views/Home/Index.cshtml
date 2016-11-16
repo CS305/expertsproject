@@ -1,55 +1,66 @@
 ﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
 @using Microsoft.AspNet.Identity
 @using IdentitySample.Models
+@{
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+    ViewBag.Title = "Home Page";
+}
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 
-    @{
-        var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
-        var currentUser = manager.FindById(User.Identity.GetUserId());
-        ViewBag.Title = "Home Page";
-    }
-    @using (Html.BeginForm())
-    {
-        <p>
-            Find by name: @Html.TextBox("SearchString")
-            <input type="submit" value="Search" />
-        </p>
-    }
-
-    <tr>
-        <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, @class="a" })
-        </th>
-        <th></th>
-    </tr>
+<tr>
+    <th>
+        @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, @class = "a" })
+    </th>
+    <th></th>
+</tr>
 <!DOCTYPE html>
 <html>
 <head>
     <style>
-        a{ 
-            color:#079449;
+        a {
+            color: #079449;
         }
-        p{ 
-            padding-top:5px; 
-            color:#079449; 
+
+        p {
+            padding-top: 5px;
+            color: #079449;
         }
-        #mydiv .entry-content{
+
+        #mydiv .entry-content {
             display: inline-block;
-            width: 100%; 
-            margin:0 auto; 
-            float:left;
-            padding:3px;
-            padding-left:15px; 
-            padding-right:15px;
+            width: 100%;
+            margin: 0 auto;
+            float: left;
+            padding: 3px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        b {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            width: 100%;
         }
     </style>
+
 </head>
 
-    @if (Model != null)
+@if (Model != null)
+{
+    foreach (var experts in Model)
     {
-        foreach (var experts in Model)
-        {
-            <body>
-                <div id="mydiv">
+        //if (experts.isDeleted = 0) 
+        //  {
+        <body>
+            <div id="mydiv">
                 <div class="entry-content" style="width:550px;">
                     <div class="row" style="width:550px;">
                         <div class="small-12 large-10 columns border-r" role="main" style="width:550px;">
@@ -59,12 +70,12 @@
                                     <div class="cn-list" data-connections-version="8.5.26-0.1.9" style="width:550px;">
                                         <div class="cn-template cn-card" data-template-version="3.0" style="width:550px;">
 
-                                            <div class="connections-list cn-list-body cn-clear" >
-                                                <div class="cn-list-secion-head" ></div>
+                                            <div class="connections-list cn-list-body cn-clear">
+                                                <div class="cn-list-secion-head"></div>
                                                 <div class="cn-list-row-alternate vcard individual"
                                                      data-entry-type="Individual"
                                                      data-entry-slug="name" style="width:550px;">
-                                                    <div class="cn-entry" style="background-color: #FFF; width: 550px; height: 100px; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
+                                                    <div class="cn-entry" id="div11" style="background-color: #FFF; width: 550px; height: 100px; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
                                                         <div class="cn-left" style="width:45%; float:left">
                                                             <div style="clear:both;"></div>
                                                             <div style="margin-bottom: 10px;">
@@ -97,7 +108,7 @@
                                                                     <span class="email-name">Work Email</span>
                                                                     <span class="cn-separator">:</span>
                                                                     <span class="email-address">
-                                                                        <a class="value" title="@experts.prefix @experts.firstName @experts.lastName work email." style="color:#079449"href="mailto: @experts.Email ">@experts.Email</a>
+                                                                        <a class="value" title="@experts.prefix @experts.firstName @experts.lastName work email." style="color:#079449" href="mailto: @experts.Email ">@experts.Email</a>
                                                                     </span>
                                                                     <span class="type" style="display: none;">INTERNET</span>
                                                                 </div>
@@ -115,6 +126,12 @@
                                                             <div style="display:table-cell; text-align:right;vertical-align:middle;">
                                                                 <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
                                                                 <span class="cn-return-to-top">
+                                                                    @{
+                                                                        if (experts.Email == currentUser.Email)
+                                                                        {
+                                                                            @Html.ActionLink("Remove", "Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, null)
+                                                                        }
+                                                                    }
                                                                     <a href="#" title="Return to top.">
                                                                         <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
                                                                     </a>
@@ -131,10 +148,9 @@
                         </div>
                     </div>
                 </div>
-                    </div>
-            </body>
-        }
-
-    }
-
+            </div>
+        </body>
+                                                                                //  }
+                                                                            }
+                                                                        }
 </html>

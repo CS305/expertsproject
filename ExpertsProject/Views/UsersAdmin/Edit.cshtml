@@ -77,6 +77,15 @@
                 @Html.EnumDropDownListFor(m => m.register, new { @class = "form-control" })
             </div>
         </div>
+        @if (User.IsInRole("Expert"))
+        {
+        <div class="from-group">
+            @Html.LabelFor(m => m.isDeleted, new { @class = "col-md-2 control-label" }) 
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.isDeleted, new { @class = "form-control" })
+            </div> 
+        </div>
+        }
         @if (User.IsInRole("Admin"))
         {
         <div class="form-group">
