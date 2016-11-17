@@ -160,7 +160,8 @@ namespace IdentitySample.Controllers
                 user.State = model.State;
                 user.PostalCode = model.PostalCode;
                 user.register = model.register;
-                user.prefix = model.prefix; 
+                user.prefix = model.prefix;
+                user.isDeleted = model.isDeleted;  
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

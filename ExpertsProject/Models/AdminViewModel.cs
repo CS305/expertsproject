@@ -32,6 +32,8 @@ namespace IdentitySample.Models
         public string lastName { get; set; } 
         [Display(Name ="Phone Number")]
         public string number { get; set; }
+        [Display(Name ="Remove from list?")]
+        public Deleted isDeleted { get; set; }
         public Register register { get; set; }
         public Prefix prefix { get; set; }
 

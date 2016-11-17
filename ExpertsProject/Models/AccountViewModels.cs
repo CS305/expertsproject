@@ -90,8 +90,10 @@ namespace IdentitySample.Models
         public string number { get; set; }
         [Display(Name = "Register as: ")]
         public Register register { get; set; }
-        [Display(Name = "Prefix")] 
+        [Display(Name = "Prefix")]
         public Prefix prefix { get; set; }
+        [Display(Name ="Remove from list?")]
+        public Deleted isDeleted { get; set; }
     }
     public class ResetPasswordViewModel
     {
