@@ -13,6 +13,7 @@ using System.Linq;
 namespace IdentitySample.Controllers
 {
     [Authorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private ApplicationDbContext db;

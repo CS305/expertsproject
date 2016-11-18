@@ -5,6 +5,7 @@
     var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
     var currentUser = manager.FindById(User.Identity.GetUserId());
     ViewBag.Title = "Home Page";
+    var user = User.Identity.GetUserName();
 }
 @using (Html.BeginForm())
 {
@@ -49,16 +50,16 @@
             margin: 0 auto;
             width: 100%;
         }
+
+        abc {
+        }
     </style>
 
 </head>
-
 @if (Model != null)
 {
     foreach (var experts in Model)
     {
-        //if (experts.isDeleted = 0) 
-        //  {
         <body>
             <div id="mydiv">
                 <div class="entry-content" style="width:550px;">
@@ -123,14 +124,13 @@
                                                                     <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
                                                                 </div>
                                                             </div>
+
                                                             <div style="display:table-cell; text-align:right;vertical-align:middle;">
                                                                 <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
                                                                 <span class="cn-return-to-top">
-                                                                    @{
-                                                                        if (experts.Email == currentUser.Email)
-                                                                        {
-                                                                            @Html.ActionLink("Remove", "Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, null)
-                                                                        }
+                                                                    @if (user != null && currentUser.Email == experts.Email)
+                                                                    {
+                                                                        @Html.ActionLink("Remove", "Edit", "UsersAdmin", new { id = User.Identity.GetUserId(), @class = "abc" }, null)
                                                                     }
                                                                     <a href="#" title="Return to top.">
                                                                         <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
@@ -150,7 +150,6 @@
                 </div>
             </div>
         </body>
-                                                                                  }
-                                                                            }
-                                                                        @*}*@
+    }
+}
 </html>
