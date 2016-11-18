@@ -12,8 +12,10 @@ namespace IdentitySample.Controllers
 {
     public class UsersAdminController : Controller
     {
+        private ApplicationDbContext _dbContext; 
         public UsersAdminController()
         {
+            _dbContext = new ApplicationDbContext(); 
         }
 
         public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
@@ -50,9 +52,15 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string stringName)
         {
-            return View(await UserManager.Users.ToListAsync());
+            var experts = from m in _dbContext.Users
+                          select m; 
+            if (!string.IsNullOrEmpty(stringName))
+            {
+                experts = experts.Where(s => s.register.ToString().Equals(stringName)); 
+            }
+            return View(await experts.ToListAsync());
         }
 
         //
