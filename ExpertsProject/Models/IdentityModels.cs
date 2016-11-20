@@ -20,7 +20,7 @@ namespace IdentitySample.Models
         }
         public string Address { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
+        public States State { get; set; }
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
         [Display(Name = "First Name")]
@@ -54,6 +54,62 @@ namespace IdentitySample.Models
             Dr, 
             Ms,
             Mrs
+        }
+
+        public enum States {
+
+            AL=1,
+            AK,
+            AZ,
+            AR,
+            CA,
+            CO,
+            CT,
+            DE,
+            FL,
+            GA,
+            HI,
+            ID,
+            IL,
+            IN,
+            IA,
+            KS,
+            KY,
+            LA,
+            ME,
+            MD,
+            MA,
+            MI,
+            MN,
+            MS,
+            MO,
+            MT,
+            NE,
+            NV,
+            NH,
+            NJ,
+            NM,
+            NY,
+            NC,
+            ND,
+            OH,
+            OK,
+            OR,
+            PA,
+            RI,
+            SC,
+            SD,
+            TN,
+            TX,
+            UT,
+            VT,
+            VA,
+            WA,
+            WV,
+            WI,
+            WY
+              
+         
         }
     }
 
