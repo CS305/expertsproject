@@ -53,7 +53,10 @@ namespace IdentitySample.Models
             Mr = 1, 
             Dr, 
             Ms,
-            Mrs
+            Mrs,
+            Pr
+            
+
         }
 
         public enum stateList {
