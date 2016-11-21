@@ -1,23 +1,26 @@
-﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
+﻿@*@model IEnumerable<IdentitySample.Models.ApplicationUser>*@
+@model PagedList.IPagedList<IdentitySample.Models.ApplicationUser>
 @using Microsoft.AspNet.Identity
 @using IdentitySample.Models
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
     var currentUser = manager.FindById(User.Identity.GetUserId());
     ViewBag.Title = "Home Page";
     var user = User.Identity.GetUserName();
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
 
 <tr>
     <th>
-        @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, @class = "a" })
+        @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
     </th>
     <th></th>
 </tr>
@@ -153,3 +156,6 @@
     }
 }
 </html>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

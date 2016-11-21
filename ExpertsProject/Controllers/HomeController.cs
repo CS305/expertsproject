@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System;
 using System.Linq;
+using PagedList;
 
 namespace IdentitySample.Controllers
 {
@@ -22,13 +23,23 @@ namespace IdentitySample.Controllers
         {
             db = new ApplicationDbContext();
         }
-        public async Task<ActionResult> Index(string sortOrder, string searchString)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
             var experts = from s in db.Users
                           select s;
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 experts = experts.Where(s => s.lastName.Contains(searchString) || s.firstName.Contains(searchString));
             }
@@ -41,8 +52,11 @@ namespace IdentitySample.Controllers
                     experts = experts.OrderBy(s => s.lastName);
                     break;
             }
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
             //return View(await UserManager.Users.ToListAsync());
-            return View(experts.ToList());
+            //return View(experts.ToList());
+            return View(experts.ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize]
