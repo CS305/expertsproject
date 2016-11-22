@@ -77,7 +77,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                                     <div style="position: absolute; top:0; right:0;"></div>
                                     <div class="cn-list" data-connections-version="8.5.26-0.1.9" style="width:550px;">
                                         <div class="cn-template cn-card" data-template-version="3.0" style="width:550px;">
-
                                             <div class="connections-list cn-list-body cn-clear">
                                                 <div class="cn-list-secion-head"></div>
                                                 <div class="cn-list-row-alternate vcard individual"
@@ -89,7 +88,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                                                             <div style="margin-bottom: 10px;">
                                                                 <div style="font-size:larger;font-variant: small-caps">
                                                                     <strong>
-                                                                        <a style="color:#079449" title="@experts.prefix + @experts.firstName + @experts.lastName">
+                                                                        <a href="@Url.Action("Index","Messages", new { id = User.Identity.GetUserId() },null)" style="color:#079449" title="@experts.prefix + @experts.firstName + @experts.lastName">
                                                                             <span class="fn n notranslate">
                                                                                 <span class="given-name">@experts.prefix  @experts.firstName</span>
                                                                                 <span class="family-name">@experts.lastName</span>
