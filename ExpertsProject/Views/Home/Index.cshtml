@@ -24,6 +24,9 @@
     </th>
     <th></th>
 </tr>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,12 +60,13 @@
         abc {
         }
     </style>
-
 </head>
-@if (Model != null)
+@if (Model != null) 
 {
     foreach (var experts in Model)
     {
+        if (experts.register != 0 && experts.isDeleted == 0)
+        {
         <body>
             <div id="mydiv">
                 <div class="entry-content" style="width:550px;">
@@ -124,10 +128,9 @@
                                                             <div style="display:table-cell; vertical-align:middle;">
                                                                 <div class="cn-categories">
                                                                     <span class="cn_category_label">Expert In:</span>
-                                                                    <span class="cn-category-name cn_category cn-category-12">Mathematics</span>
+                                                                    <span class="cn-category-name cn_category cn-category-12">@experts.expertise ,@experts.expertise2 ,@experts.expertise3</span>
                                                                 </div>
                                                             </div>
-
                                                             <div style="display:table-cell; text-align:right;vertical-align:middle;">
                                                                 <span class="cn-last-updated" style="font-size: 10px; font-variant: small-caps; margin-right: 10px; display:none">Updated 5 years ago.</span>
                                                                 <span class="cn-return-to-top">
@@ -153,9 +156,8 @@
                 </div>
             </div>
         </body>
+        }
     }
 }
 </html>
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

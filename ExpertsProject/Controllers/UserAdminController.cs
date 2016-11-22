@@ -105,7 +105,10 @@ namespace IdentitySample.Controllers
                     register = userViewModel.register,
                     number = userViewModel.number, 
                     prefix = userViewModel.prefix,
-                   isDeleted = userViewModel.isDeleted
+                   isDeleted = userViewModel.isDeleted,
+                   expertise = userViewModel.expertise,
+                   expertise2 = userViewModel.expertise2, 
+                   expertise3 = userViewModel.expertise3
     };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
@@ -117,6 +120,9 @@ namespace IdentitySample.Controllers
                 user.register = userViewModel.register;
                 user.prefix = userViewModel.prefix;
                 user.isDeleted = userViewModel.isDeleted;
+                user.expertise3 = userViewModel.expertise3;
+                user.expertise2 = userViewModel.expertise2;
+                user.expertise = userViewModel.expertise;
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -166,16 +172,19 @@ namespace IdentitySample.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                Address = user.Address, 
-                City = user.City, 
-                State = user.State, 
-                PostalCode = user.PostalCode, 
-                firstName = user.firstName, 
-                lastName = user.lastName, 
-                number = user.number, 
+                Address = user.Address,
+                City = user.City,
+                State = user.State,
+                PostalCode = user.PostalCode,
+                firstName = user.firstName,
+                lastName = user.lastName,
+                number = user.number,
                 register = user.register,
                 prefix = user.prefix,
-                isDeleted=user.isDeleted,
+                isDeleted = user.isDeleted,
+                expertise = user.expertise,
+                expertise2 = user.expertise2,
+                expertise3 = user.expertise3,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
@@ -189,7 +198,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Email,Id,prefix, Address, City, State,PostalCode,firstName,lastName,number,register")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Email,Id,prefix, Address, City, State,PostalCode,firstName,lastName,number,register, isDeleted, expertise,expertise2,expertise3")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -211,6 +220,9 @@ namespace IdentitySample.Controllers
                 user.register = editUser.register;
                 user.prefix = editUser.prefix;
                 user.isDeleted = editUser.isDeleted;
+                user.expertise3 = editUser.expertise3;
+                user.expertise2 = editUser.expertise2;
+                user.expertise = editUser.expertise;
 
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 
