@@ -54,10 +54,9 @@ namespace IdentitySample.Controllers
             }
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            //return View(await UserManager.Users.ToListAsync());
-            //return View(experts.ToList());
-            //
-            return View(experts.ToPagedList(pageNumber, pageSize));
+            //var context = new ApplicationDbContext();
+            //var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("Expert")).ToList();
+            return View (experts.ToPagedList(pageNumber, pageSize));
         }
 
         [Authorize]
