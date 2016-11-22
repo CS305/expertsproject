@@ -94,6 +94,12 @@ namespace IdentitySample.Models
         public Prefix prefix { get; set; }
         [Display(Name ="Remove from list?")]
         public Deleted isDeleted { get; set; }
+        [Display(Name = "Expertise #1")]
+        public string expertise { get; set; }
+        [Display(Name = "Expertise #2")]
+        public string expertise2 { get; set; }
+        [Display(Name = "Expertise #3")]
+        public string expertise3 { get; set; }
     }
     public class ResetPasswordViewModel
     {

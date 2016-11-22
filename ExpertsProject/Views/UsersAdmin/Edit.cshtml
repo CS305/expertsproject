@@ -77,9 +77,27 @@
                 @Html.EnumDropDownListFor(m => m.register, new { @class = "form-control" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.expertise, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.expertise, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.expertise2, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.expertise2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.expertise3, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.expertise3, new { @class = "form-control" })
+            </div>
+        </div>
         @if (User.IsInRole("Expert"))
         {
-        <div class="from-group">
+        <div class="form-group">
             @Html.LabelFor(m => m.isDeleted, new { @class = "col-md-2 control-label" }) 
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(m => m.isDeleted, new { @class = "form-control" })
@@ -90,7 +108,7 @@
         {
         <div class="form-group">
             @Html.Label("Roles", new { @class = "control-label col-md-2" })
-            <span class=" col-md-10">
+            <span class="col-md-10">
                 @foreach (var item in Model.RolesList)
                 {
                     <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
@@ -106,11 +124,12 @@
         </div>
     </div>
 }
-
+@if (User.IsInRole("Admin"))
+{
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
