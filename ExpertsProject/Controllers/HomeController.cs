@@ -2,14 +2,10 @@
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using IdentitySample.Models;
-using ExpertsProject.Models;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using System;
 using System.Linq;
 using PagedList;
+using System.Web.Security;
 
 namespace IdentitySample.Controllers
 {
@@ -54,12 +50,11 @@ namespace IdentitySample.Controllers
             }
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            //return View(await UserManager.Users.ToListAsync());
-            //return View(experts.ToList());
-            //
+            //var context = new ApplicationDbContext();
+            //var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("Expert")).ToList();
             return View(experts.ToPagedList(pageNumber, pageSize));
+            
         }
-
         [Authorize]
         public ActionResult About()
         {
