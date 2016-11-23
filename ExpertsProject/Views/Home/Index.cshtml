@@ -10,7 +10,7 @@
     ViewBag.Title = "Home Page";
     var user = User.Identity.GetUserName();
     var context = new ApplicationDbContext();
-    var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("Expert")).ToList();
+
 }
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
@@ -108,7 +108,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                                                                     <span class="tel cn-phone-number">
                                                                         <span class="phone-name">Work Phone</span>
                                                                         <span class="cn-separator">:</span>
-                                                                        <span class="value">@experts.number</span>
+                                                                        <span class="value"> @if (experts.number != null) {@String.Format("{0:(###) ###-####}", double.Parse(experts.number))}</span>
                                                                         <span class="type" style="display: none;"> work</span>
                                                                     </span>
                                                                 </div>

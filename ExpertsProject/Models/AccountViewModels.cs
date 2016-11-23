@@ -86,7 +86,10 @@ namespace IdentitySample.Models
         public string firstName { get; set; } 
         [Display(Name = "Last Name")] 
         public string lastName { get; set; }
-        [Display(Name ="Phone Number")] 
+        [Display(Name ="Phone Number")]
+        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string number { get; set; }
         [Display(Name = "Register as: ")]
         public Register register { get; set; }
