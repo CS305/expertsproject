@@ -9,8 +9,6 @@
     var currentUser = manager.FindById(User.Identity.GetUserId());
     ViewBag.Title = "Home Page";
     var user = User.Identity.GetUserName();
-    var context = new ApplicationDbContext();
-
 }
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
