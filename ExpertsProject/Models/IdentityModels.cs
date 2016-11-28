@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 namespace IdentitySample.Models
 {
@@ -20,7 +21,9 @@ namespace IdentitySample.Models
         }
         public string Address { get; set; }
         public string City { get; set; }
-        public stateList State {get; set; }
+        
+
+
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
         [Display(Name = "First Name")]
@@ -31,6 +34,7 @@ namespace IdentitySample.Models
         public string number { get; set; }
         public Register register { get; set; }
         public Prefix prefix { get;set; }
+        public stateList State { get; set; }
         public string DisplayAddress
         {
             get
@@ -55,7 +59,6 @@ namespace IdentitySample.Models
             Ms,
             Mrs,
             Pr
-            
 
         }
 
@@ -112,8 +115,9 @@ namespace IdentitySample.Models
             WI,
             WY
               
-         
         }
+
+       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

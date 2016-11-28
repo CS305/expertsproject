@@ -95,12 +95,13 @@ namespace IdentitySample.Controllers
                     UserName = userViewModel.Email,
                     Email = userViewModel.Email,
                     Address = userViewModel.Address,
-                    State = userViewModel.State,
+                    State=userViewModel.State,
                     City = userViewModel.City,
                     PostalCode = userViewModel.PostalCode,
                     register = userViewModel.register,
                     number = userViewModel.number, 
                     prefix = userViewModel.prefix
+                    
                 };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
