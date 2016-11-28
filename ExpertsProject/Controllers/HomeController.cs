@@ -2,19 +2,62 @@
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using IdentitySample.Models;
-using System.Configuration;
-using System.Data.SqlClient;
+using System;
+using System.Linq;
+using PagedList;
+using System.Web.Security;
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private ApplicationDbContext db;
 
+        public HomeController()
+        {
+            db = new ApplicationDbContext();
+        }
+              
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            //var experts = from s in db.Users.Where(s => s.register != 0)
+            //              select s;
+            var experts = from s in db.Users.Where(s => s.Roles.Select(y => y.RoleId).Contains("05d81ec3-1dbd-488c-ba79-a3c0ffb7a94c"))
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                experts = experts.Where(s => s.lastName.Contains(searchString) || s.firstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    experts = experts.OrderByDescending(s => s.lastName);
+                    break;
+                default:
+                    experts = experts.OrderBy(s => s.lastName);
+                    break;
+            }
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            //var context = new ApplicationDbContext();
+            //var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("Expert")).ToList();
+            return View(experts.ToPagedList(pageNumber, pageSize));
+            
+        }
         [Authorize]
         public ActionResult About()
         {
@@ -32,8 +75,18 @@ namespace IdentitySample.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public HomeController()
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
         {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public HomeController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -64,27 +117,6 @@ namespace IdentitySample.Controllers
             {
                 _userManager = value;
             }
-        }
-        public string getFirstName(string userId)
-        {
-            string firstName = "";
-            var con = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-            using (SqlConnection myConnection = new SqlConnection(con))
-            {
-                string oString = "Select * from AspNetUsers Where UserName=@fname";
-                SqlCommand oCmd = new SqlCommand(oString, myConnection);
-                oCmd.Parameters.AddWithValue("@Fname", userId);
-                myConnection.Open();
-                using (SqlDataReader oReader = oCmd.ExecuteReader())
-                {
-                    while (oReader.Read())
-                    {
-                        firstName = oReader["firstName"].ToString();
-                    }
-                    myConnection.Close();
-                }
-            }
-            return firstName;
         }
     }
 }

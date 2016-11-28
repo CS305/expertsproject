@@ -6,6 +6,12 @@ using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using IdentitySample.Models;
 
 namespace IdentitySample.Models
 {
@@ -21,9 +27,7 @@ namespace IdentitySample.Models
         }
         public string Address { get; set; }
         public string City { get; set; }
-        
-
-
+        public string State { get; set; }
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
         [Display(Name = "First Name")]
@@ -34,18 +38,30 @@ namespace IdentitySample.Models
         public string number { get; set; }
         public Register register { get; set; }
         public Prefix prefix { get;set; }
-        public stateList State { get; set; }
+        [Display (Name ="Remove from list")]
+        public Deleted isDeleted { get; set; }
+        [Display(Name ="Expertise #1")]
+        public string expertise { get; set; }
+        [Display(Name = "Expertise #2")]
+        public string expertise2 { get; set; }
+        [Display(Name = "Expertise #3")]
+        public string expertise3 { get; set; }
         public string DisplayAddress
         {
             get
             {
                 string dspAddress = string.IsNullOrWhiteSpace(this.Address) ? "" : this.Address;
                 string dspCity = string.IsNullOrWhiteSpace(this.City) ? "" : this.City;
-                
+                string dspState = string.IsNullOrWhiteSpace(this.State) ? "" : this.State;
                 string dspPostalCode = string.IsNullOrWhiteSpace(this.PostalCode) ? "" : this.PostalCode;
                 return string
-                    .Format("{0} {1} {2} {3}", dspAddress, dspCity, dspPostalCode);
+                    .Format("{0} {1} {2} {3}", dspAddress, dspCity, dspState, dspPostalCode);
             }
+        }
+        public enum Deleted
+        {
+            No=0, 
+            Yes
         }
         public enum Register
         {
@@ -57,71 +73,16 @@ namespace IdentitySample.Models
             Mr = 1, 
             Dr, 
             Ms,
-            Mrs,
-            Pr
-
+            Mrs
         }
-
-        public enum stateList {
-
-            AL=1,
-            AK,
-            AZ,
-            AR,
-            CA,
-            CO,
-            CT,
-            DE,
-            FL,
-            GA,
-            HI,
-            ID,
-            IL,
-            IN,
-            IA,
-            KS,
-            KY,
-            LA,
-            ME,
-            MD,
-            MA,
-            MI,
-            MN,
-            MS,
-            MO,
-            MT,
-            NE,
-            NV,
-            NH,
-            NJ,
-            NM,
-            NY,
-            NC,
-            ND,
-            OH,
-            OK,
-            OR,
-            PA,
-            RI,
-            SC,
-            SD,
-            TN,
-            TX,
-            UT,
-            VT,
-            VA,
-            WA,
-            WV,
-            WI,
-            WY
-              
-        }
-
-       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //override
+        //public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Expert> Expert { get; set; }
+        public DbSet<MessageModel> MessageModel { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

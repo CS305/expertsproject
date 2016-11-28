@@ -32,8 +32,16 @@ namespace IdentitySample.Models
         public string lastName { get; set; } 
         [Display(Name ="Phone Number")]
         public string number { get; set; }
+        [Display(Name ="Remove from list?")]
+        public Deleted isDeleted { get; set; }
         public Register register { get; set; }
         public Prefix prefix { get; set; }
+        [Display(Name = "Expertise #1")]
+        public string expertise { get; set; }
+        [Display(Name = "Expertise #2")]
+        public string expertise2 { get; set; }
+        [Display(Name = "Expertise #3")]
+        public string expertise3 { get; set; }
 
         public IEnumerable<SelectListItem> RolesList { get; set; }
     }

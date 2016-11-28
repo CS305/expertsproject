@@ -24,6 +24,9 @@
                 }
             </p>
             <p>
+                    @Html.ActionLink("Edit","Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, null) 
+            </p>
+            <p>
                 First Name: @Html.Raw(currentUser.firstName)
             </p>
             <p>
@@ -41,9 +44,26 @@
             <p>
                 Postal Code: @Html.Raw(currentUser.PostalCode)
             </p>
-
             <p>
                 Phone Number: @Html.Raw(currentUser.number)
+            </p>
+            @if (currentUser.register != 0)
+            {
+            <p>
+                Expertise #1: @Html.Raw(currentUser.expertise) 
+            </p>
+            <p>
+                Expertise #2: @Html.Raw(currentUser.expertise2) 
+            </p>
+            <p>
+                Expertise #3: @Html.Raw(currentUser.expertise3) 
+            </p>
+            <p>
+                Removed from list? @Html.Raw(currentUser.isDeleted) 
+            </p>
+            }
+            <p>
+                Registered as: @Html.Raw(currentUser.register) 
             </p>
         </div>
     </div>

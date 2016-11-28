@@ -22,7 +22,7 @@
 <body>
     <div id="myNav">
         <header class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
+            <div class="container" style="width:100%">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -35,12 +35,11 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        
 
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) 
                         {
                             <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin", routeValues: new { stringName = "Expert" }, htmlAttributes: null )</li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")
@@ -48,13 +47,12 @@
             </div>
         </header>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+</body>
+</html>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+</div>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")

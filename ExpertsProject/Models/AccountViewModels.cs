@@ -86,12 +86,23 @@ namespace IdentitySample.Models
         public string firstName { get; set; } 
         [Display(Name = "Last Name")] 
         public string lastName { get; set; }
-        [Display(Name ="Phone Number")] 
+        [Display(Name ="Phone Number")]
+        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string number { get; set; }
         [Display(Name = "Register as: ")]
         public Register register { get; set; }
-        [Display(Name = "Prefix")] 
+        [Display(Name = "Prefix")]
         public Prefix prefix { get; set; }
+        [Display(Name ="Remove from list?")]
+        public Deleted isDeleted { get; set; }
+        [Display(Name = "Expertise #1")]
+        public string expertise { get; set; }
+        [Display(Name = "Expertise #2")]
+        public string expertise2 { get; set; }
+        [Display(Name = "Expertise #3")]
+        public string expertise3 { get; set; }
     }
     public class ResetPasswordViewModel
     {
