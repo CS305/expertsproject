@@ -27,6 +27,9 @@
                     @Html.ActionLink("Edit","Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, null) 
             </p>
             <p>
+                Prefix: @Html.Raw(currentUser.prefix) 
+            </p>
+            <p>
                 First Name: @Html.Raw(currentUser.firstName)
             </p>
             <p>

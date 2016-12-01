@@ -70,7 +70,7 @@ namespace IdentitySample.Models
         }
         public enum Prefix
         {
-            Mr = 1, 
+            Mr = 0, 
             Dr, 
             Ms,
             Mrs
