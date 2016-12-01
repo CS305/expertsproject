@@ -1,14 +1,24 @@
 ﻿@model IdentitySample.Models.IndexViewModel
 @using Microsoft.AspNet.Identity
 @using IdentitySample.Models
-    @{
-        //IdentitySample.Controllers.ManageController p = new IdentitySample.Controllers.ManageController();
-        var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
-        var currentUser = manager.FindById(User.Identity.GetUserId());
+@{
+    //IdentitySample.Controllers.ManageController p = new IdentitySample.Controllers.ManageController();
+    var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
 
-        ViewBag.Title = "Manage your account";
+    ViewBag.Title = "Manage your account";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    a.my-class
+    {
+    color: #079449;
     }
-
+        </style> 
+    </head>
+<body>
     <h2>@ViewBag.Title.</h2>
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div class="row">
@@ -16,18 +26,18 @@
             <p>
                 @if (Model.HasPassword)
             {
-                    @Html.ActionLink("Change your password", "ChangePassword")
+                    @Html.ActionLink("Change your password", "ChangePassword", null, new { @class = "my-class" })
                 }
                 else
                 {
-                    @Html.ActionLink("Pick a password", "SetPassword")
+                    @Html.ActionLink("Pick a password", "SetPassword", null, new { @class = "my-class" })
                 }
             </p>
             <p>
-                    @Html.ActionLink("Edit","Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, null) 
+                @Html.ActionLink("Edit", "Edit", "UsersAdmin", new { id = User.Identity.GetUserId() }, new { @class = "my-class" })
             </p>
             <p>
-                Prefix: @Html.Raw(currentUser.prefix) 
+                Prefix: @Html.Raw(currentUser.prefix)
             </p>
             <p>
                 First Name: @Html.Raw(currentUser.firstName)
@@ -52,21 +62,23 @@
             </p>
             @if (currentUser.register != 0)
             {
-            <p>
-                Expertise #1: @Html.Raw(currentUser.expertise) 
-            </p>
-            <p>
-                Expertise #2: @Html.Raw(currentUser.expertise2) 
-            </p>
-            <p>
-                Expertise #3: @Html.Raw(currentUser.expertise3) 
-            </p>
-            <p>
-                Removed from list? @Html.Raw(currentUser.isDeleted) 
-            </p>
+                <p>
+                    Expertise #1: @Html.Raw(currentUser.expertise)
+                </p>
+                <p>
+                    Expertise #2: @Html.Raw(currentUser.expertise2)
+                </p>
+                <p>
+                    Expertise #3: @Html.Raw(currentUser.expertise3)
+                </p>
+                <p>
+                    Removed from list? @Html.Raw(currentUser.isDeleted)
+                </p>
             }
             <p>
-                Registered as: @Html.Raw(currentUser.register) 
+                Registered as: @Html.Raw(currentUser.register)
             </p>
         </div>
     </div>
+    </body>
+</html>
