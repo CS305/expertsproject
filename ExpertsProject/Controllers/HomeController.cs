@@ -34,8 +34,6 @@ namespace IdentitySample.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            //var experts = from s in db.Users.Where(s => s.register != 0)
-            //              select s;
             var experts = from s in db.Users.Where(s => s.Roles.Select(y => y.RoleId).Contains("05d81ec3-1dbd-488c-ba79-a3c0ffb7a94c"))
                           select s;
             if (!String.IsNullOrEmpty(searchString))
@@ -53,8 +51,6 @@ namespace IdentitySample.Controllers
             }
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            //var context = new ApplicationDbContext();
-            //var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("Expert")).ToList();
             return View(experts.ToPagedList(pageNumber, pageSize));
             
         }
