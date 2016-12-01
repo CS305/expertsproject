@@ -16,6 +16,7 @@ namespace IdentitySample.Controllers
     {
         public RolesAdminController()
         {
+            
         }
 
         public RolesAdminController(ApplicationUserManager userManager,
