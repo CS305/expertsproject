@@ -13,7 +13,7 @@ namespace ExpertsProject.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201611212258309_initial"; }
+            get { return "201611281936501_initial"; }
         }
         
         string IMigrationMetadata.Source

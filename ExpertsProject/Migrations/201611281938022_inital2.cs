@@ -3,7 +3,7 @@ namespace ExpertsProject.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class inital2 : DbMigration
     {
         public override void Up()
         {

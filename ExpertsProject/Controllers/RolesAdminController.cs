@@ -11,12 +11,11 @@ using System.Collections.Generic;
 
 namespace IdentitySample.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class RolesAdminController : Controller //jnknkn
+    //[Authorize(Roles = "Admin")]
+    public class RolesAdminController : Controller
     {
         public RolesAdminController()
         {
-            
         }
 
         public RolesAdminController(ApplicationUserManager userManager,

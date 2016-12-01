@@ -9,7 +9,7 @@ namespace ExpertsProject.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(IdentitySample.Models.ApplicationDbContext context)
