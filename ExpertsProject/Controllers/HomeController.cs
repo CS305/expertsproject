@@ -34,7 +34,7 @@ namespace IdentitySample.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            var experts = from s in db.Users.Where(s => s.Roles.Select(y => y.RoleId).Contains("05d81ec3-1dbd-488c-ba79-a3c0ffb7a94c"))
+            var experts = from s in db.Users.Where(s => s.Roles.Select(y => y.RoleId).Contains("d6ee209f-679f-4b49-bbb8-cc83efeefef1"))
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
