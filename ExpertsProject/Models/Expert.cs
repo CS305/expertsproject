@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ExpertsProject.Models
+﻿namespace ExpertsProject.Models
 {
     public class Expert
     {

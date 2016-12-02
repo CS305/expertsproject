@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace IdentitySample.Controllers
 {
     public class UsersAdminController : Controller
     {
-        private ApplicationDbContext _dbContext; 
+        private ApplicationDbContext _dbContext;
         public UsersAdminController()
         {
-            _dbContext = new ApplicationDbContext(); 
+            _dbContext = new ApplicationDbContext();
         }
 
         public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
@@ -55,10 +56,10 @@ namespace IdentitySample.Controllers
         public async Task<ActionResult> Index(string stringName)
         {
             var experts = from m in _dbContext.Users
-                          select m; 
+                          select m;
             if (!string.IsNullOrEmpty(stringName))
             {
-                experts = experts.Where(s => s.register.ToString().Equals(stringName)); 
+                experts = experts.Where(s => s.register.ToString().Equals(stringName));
             }
             return View(await experts.ToListAsync());
         }
@@ -103,13 +104,13 @@ namespace IdentitySample.Controllers
                     City = userViewModel.City,
                     PostalCode = userViewModel.PostalCode,
                     register = userViewModel.register,
-                    number = userViewModel.number, 
+                    number = userViewModel.number,
                     prefix = userViewModel.prefix,
-                   isDeleted = userViewModel.isDeleted,
-                   expertise = userViewModel.expertise,
-                   expertise2 = userViewModel.expertise2, 
-                   expertise3 = userViewModel.expertise3
-    };
+                    isDeleted = userViewModel.isDeleted,
+                    expertise = userViewModel.expertise,
+                    expertise2 = userViewModel.expertise2,
+                    expertise3 = userViewModel.expertise3
+                };
                 user.Address = userViewModel.Address;
                 user.City = userViewModel.City;
                 user.State = userViewModel.State;
@@ -193,6 +194,12 @@ namespace IdentitySample.Controllers
                 })
             });
         }
+        public void UserPasswordChangedHandler()
+        {
+            FormsAuthentication.SignOut();
+            Roles.DeleteCookie();
+            Session.Clear();
+        }
 
         //
         // POST: /Users/Edit/5
@@ -245,13 +252,14 @@ namespace IdentitySample.Controllers
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("Index");
-                } 
+                }
                 else
                 {
                     return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Home", action = "Index" }));
                 }
             }
             ModelState.AddModelError("", "Something failed.");
+            UserPasswordChangedHandler(); 
             return View();
         }
 
