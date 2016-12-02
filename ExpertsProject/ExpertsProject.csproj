@@ -290,14 +290,22 @@
     <Compile Include="Migrations\201611281938022_inital2.Designer.cs">
       <DependentUpon>201611281938022_inital2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021947026_initial100.cs" />
+    <Compile Include="Migrations\201612021947026_initial100.Designer.cs">
+      <DependentUpon>201612021947026_initial100.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021951318_int111.cs" />
+    <Compile Include="Migrations\201612021951318_int111.Designer.cs">
+      <DependentUpon>201612021951318_int111.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Expert.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MessageModel.cs" />
-    <Compile Include="Models\MessageModels2.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Posts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -307,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281938022_inital2.resx">
       <DependentUpon>201611281938022_inital2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021947026_initial100.resx">
+      <DependentUpon>201612021947026_initial100.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021951318_int111.resx">
+      <DependentUpon>201612021951318_int111.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

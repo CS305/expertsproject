@@ -75,7 +75,8 @@ namespace IdentitySample.Models
         //override
         //public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Expert> Expert { get; set; }
-        public DbSet<MessageModel> MessageModel { get; set; }
+        public DbSet<Message>Message { get; set; } 
+        public DbSet<Posts> Posts { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
