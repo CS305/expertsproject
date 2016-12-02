@@ -46,7 +46,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             margin: 0 auto;
             float: left;
             padding: 3px;
-            padding-left: 15px;
+            padding-left: 8px;
             padding-right: 15px;
         }
 
@@ -69,20 +69,20 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
         {
             <body>
                 <div id="mydiv">
-                    <div class="entry-content" style="width:550px;">
-                        <div class="row" style="width:550px;">
-                            <div class="small-12 large-10 columns border-r" role="main" style="width:550px;">
-                                <article class="post-/ page type-page status-publish hentry" style="width:550px;">
-                                    <div class="entry-content" style="width:550px;">
+                    <div class="entry-content" style="width:500px;">
+                        <div class="row" style="width:500px;">
+                            <div class="small-12 large-10 columns border-r" role="main" style="width:500px;">
+                                <article class="post-/ page type-page status-publish hentry" style="width:500px;">
+                                    <div class="entry-content" style="width:500px;">
                                         <div style="position: absolute; top:0; right:0;"></div>
-                                        <div class="cn-list" data-connections-version="8.5.26-0.1.9" style="width:550px;">
-                                            <div class="cn-template cn-card" data-template-version="3.0" style="width:550px;">
+                                        <div class="cn-list" data-connections-version="8.5.26-0.1.9" style="width:500px;">
+                                            <div class="cn-template cn-card" data-template-version="3.0" style="width:500px;">
                                                 <div class="connections-list cn-list-body cn-clear">
                                                     <div class="cn-list-secion-head"></div>
                                                     <div class="cn-list-row-alternate vcard individual"
                                                          data-entry-type="Individual"
-                                                         data-entry-slug="name" style="width:550px;">
-                                                        <div class="cn-entry" id="div11" style="background-color: #FFF; width: 550px; height: 100px; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
+                                                         data-entry-slug="name" style="width:500px;">
+                                                        <div class="cn-entry" id="div11" style="background-color: #FFF; width: 500px; height: 100px; border: 1px solid #E3E3E3; border-radius: 4px; color: #000; margin: 8px 0; padding: 10px; position: relative">
                                                             <div class="cn-left" style="width:45%; float:left">
                                                                 <div style="clear:both;"></div>
                                                                 <div style="margin-bottom: 10px;">
@@ -137,9 +137,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                                                                         {
                                                                             @Html.ActionLink("Remove", "Edit", "UsersAdmin", new { id = User.Identity.GetUserId(), @class = "abc" }, null)
                                                                         }
-                                                                        <a href="#" title="Return to top.">
-                                                                            <img src="http://www.marshall.edu/experts/wp-content/plugins/connections/assets/images/uparrow.gif" alt="Return to top.">
-                                                                        </a>
                                                                     </span>
                                                                 </div>
                                                             </div>

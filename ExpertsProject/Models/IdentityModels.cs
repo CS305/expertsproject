@@ -70,8 +70,12 @@ namespace IdentitySample.Models
         }
         public enum Prefix
         {
+<<<<<<< HEAD
             Pr=1,
             Mr, 
+=======
+            Mr = 0, 
+>>>>>>> refs/remotes/origin/master
             Dr, 
             Ms,
             Mrs
