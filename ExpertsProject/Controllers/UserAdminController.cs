@@ -194,12 +194,6 @@ namespace IdentitySample.Controllers
                 })
             });
         }
-        public void UserPasswordChangedHandler()
-        {
-            FormsAuthentication.SignOut();
-            Roles.DeleteCookie();
-            Session.Clear();
-        }
 
         //
         // POST: /Users/Edit/5
@@ -242,8 +236,10 @@ namespace IdentitySample.Controllers
                     ModelState.AddModelError("", result.Errors.First());
                     return View();
                 }
-                result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>());
-
+                if (User.IsInRole("Admin"))
+                {
+                    result = await UserManager.RemoveFromRolesAsync(user.Id, userRoles.Except(selectedRole).ToArray<string>());
+                }
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", result.Errors.First());
@@ -258,8 +254,7 @@ namespace IdentitySample.Controllers
                     return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Home", action = "Index" }));
                 }
             }
-            ModelState.AddModelError("", "Something failed.");
-            UserPasswordChangedHandler(); 
+            ModelState.AddModelError("", "Something failed."); 
             return View();
         }
 
