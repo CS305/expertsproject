@@ -75,6 +75,7 @@ namespace IdentitySample.Models
             Ms,
             Mrs
         }
+        //
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
