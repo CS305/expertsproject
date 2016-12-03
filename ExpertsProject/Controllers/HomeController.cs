@@ -14,7 +14,7 @@ namespace IdentitySample.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db;
-
+        //
         public HomeController()
         {
             db = new ApplicationDbContext();
