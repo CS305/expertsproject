@@ -75,6 +75,11 @@ namespace IdentitySample.Models
             Ms,
             Mrs
         }
+
+        public string PostID { get; set; }
+        public string CommentID { get; set; }
+        public virtual ICollection<Post> Messages { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
