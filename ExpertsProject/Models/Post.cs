@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace ExpertsProject.Models
 {
     public class Post
     {
         [Key]
-        public string ID { get; set; }
+        public string PostID { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public string ToEmail { get; set; }

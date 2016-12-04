@@ -77,7 +77,7 @@ namespace IdentitySample.Models
         }
         public string PostID { get; set; }
         public string CommentID { get; set; }
-        public virtual ICollection<Post> Messages { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }
 

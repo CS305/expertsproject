@@ -6,19 +6,19 @@ namespace ExpertsProject.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class inital2 : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class addPostTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(inital2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addPostTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611281938022_inital2"; }
+            get { return "201612040243283_addPostTable"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target
